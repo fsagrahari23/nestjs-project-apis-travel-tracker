@@ -73,13 +73,16 @@ Destination Module
 CRUD Operations:
 The Destination Module provides endpoints for creating, reading, updating, and deleting destination records. This module is designed with clear separation of concerns and robust error handling.
 
-## Endpoints Overview:
 
-POST /destination/add: Allows authenticated users to add new destinations.
-GET /destination/all: Retrieves a list of all destinations.
-GET /destination/:id: Fetches details of a specific destination.
-PATCH /destination/:id: Enables updates to destination information.
-DELETE /destination/:id: Permits the deletion of a destination record.
+- **Endpoints Overview:**
+  -**POST /destination/add**: Allows authenticated users to add new destinations.
+  -**GET /destination/all**: Retrieves a list of all destinations.
+  -**GET /destination/:id**: Fetches details of a specific destination.
+  -**PATCH /destination/:id**: Enables updates to destination information.
+  -**DELETE /destination/:id**: Permits the deletion of a destination record.
+  -**POST /auth/regiter**:Register your self with mail id and password
+  -**POST /auth/login**:Login your self with mail id and password to track your destination list use the above api for your frontend as apis
+   
 Contributing
 Contributions are highly welcome! Please open an issue or submit a pull request with improvements or bug fixes.
 
