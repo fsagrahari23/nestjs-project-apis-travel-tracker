@@ -1,98 +1,86 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Secure Destination Management API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A robust, secure API built using **NestJS**, **TypeScript**, **Prisma**, **PostgreSQL**, **PassportJS**, and **JWT**. This project implements comprehensive authentication and authorization to ensure that only authenticated users can access sensitive routes.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tech Stack
 
-## Description
+- **NestJS**: A scalable, modular framework for building efficient server-side applications.
+- **TypeScript**: Provides strong typing and modern JavaScript features.
+- **Prisma**: A modern ORM that simplifies interactions with a PostgreSQL database.
+- **PostgreSQL**: A reliable, open-source relational database.
+- **PassportJS**: Middleware for implementing flexible authentication strategies.
+- **JWT (JSON Web Tokens)**: Secures API endpoints via stateless, token-based authentication.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+- **User Authentication & Authorization**
+  - **Registration**: New users can register via the `/auth/register` endpoint.
+  - **Login**: Registered users log in through the `/auth/login` endpoint and receive a JWT token.
+  - **Route Protection**: Uses PassportJS with a JWT strategy to guard endpoints, ensuring only authenticated users can access protected resources.
 
-```bash
-$ npm install
-```
+- **Destination Management**
+  - **Add Destination**: Create a new destination using the `/destination/add` endpoint.
+  - **Retrieve Destinations**:
+    - **All Destinations**: Fetch all destinations with `/destination/all`.
+    - **Single Destination**: Get details for a specific destination via `/destination/:id`.
+  - **Update Destination**: Modify destination details with the `/destination/:id` (PATCH) endpoint.
+  - **Delete Destination**: Remove a destination using the `/destination/:id` (DELETE) endpoint.
 
-## Compile and run the project
+## Installation
 
-```bash
-# development
-$ npm run start
+### Prerequisites
 
-# watch mode
-$ npm run start:dev
+- Node.js (>= 14.x)
+- npm or yarn
+- PostgreSQL
+- Basic familiarity with JWT and PassportJS for authentication
 
-# production mode
-$ npm run start:prod
-```
+### Setup
 
-## Run tests
+1. **Clone the repository:**
 
-```bash
-# unit tests
-$ npm run test
+   ```bash
+   git clone https://github.com/yourusername/your-repo.git
+   cd your-repo
 
-# e2e tests
-$ npm run test:e2e
+npm install
 
-# test coverage
-$ npm run test:cov
-```
+Create a .env file in the project root with the following keys:
 
-## Deployment
+DATABASE_URL=postgresql://user:password@localhost:5432/yourdbname
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=3600s
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+npx prisma migrate dev
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+npm run start:dev
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+# Detailed Overview
+### Authentication with PassportJS and JWT
+## PassportJS Integration:
+PassportJS is utilized to manage authentication strategies. In this project, it is paired with a JWT strategy that validates the token on each request, ensuring secure access control for protected routes.
 
-## Resources
+## JWT-Based Stateless Authentication:
+Once a user logs in, a JWT token is generated and returned. This token must be included in the header of subsequent requests, allowing the server to authenticate requests without maintaining session state. This method scales efficiently and minimizes server overhead.
 
-Check out a few resources that may come in handy when working with NestJS:
+## Implementation Highlights:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Auth Module: Manages user registration and login.
+JWT Strategy: Validates token authenticity and extracts user data from the payload.
+Route Guards: Implemented via NestJS guards, these ensure that only requests containing a valid JWT can access sensitive endpoints.
+Destination Module
+CRUD Operations:
+The Destination Module provides endpoints for creating, reading, updating, and deleting destination records. This module is designed with clear separation of concerns and robust error handling.
 
-## Support
+## Endpoints Overview:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+POST /destination/add: Allows authenticated users to add new destinations.
+GET /destination/all: Retrieves a list of all destinations.
+GET /destination/:id: Fetches details of a specific destination.
+PATCH /destination/:id: Enables updates to destination information.
+DELETE /destination/:id: Permits the deletion of a destination record.
+Contributing
+Contributions are highly welcome! Please open an issue or submit a pull request with improvements or bug fixes.
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
